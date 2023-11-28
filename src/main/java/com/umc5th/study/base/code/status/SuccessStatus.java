@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public enum SuccessStatus implements BaseCode {
-    OK(HttpStatus.OK, "OK", "요청 성공");
+    OK(HttpStatus.OK, "OK", "요청 성공"),
+    CREATED(HttpStatus.CREATED, "CREATED", "요청 성공 및 리소스 생성됨"),
+    ;
 
     private final HttpStatus httpStatus;
     private final String code;
