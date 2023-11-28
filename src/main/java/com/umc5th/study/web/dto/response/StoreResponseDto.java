@@ -18,4 +18,14 @@ public class StoreResponseDto {
 
         private Long storeId;
     }
+
+    @Builder
+    @Getter
+    @Setter
+    @AllArgsConstructor(access = AccessLevel.PROTECTED)
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class CreateReviewResponseDto {
+
+        private Long reviewId;
+    }
 }
