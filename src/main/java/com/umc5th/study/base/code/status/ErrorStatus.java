@@ -13,7 +13,8 @@ public enum ErrorStatus implements BaseCode {
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "COMMON_500", "서버 에러"),
     VALIDATION_ERROR(HttpStatus.BAD_REQUEST, "COMMON_401", "잘못된 요청"),
     TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP_001", "테스트 에러"),
-    ;
+
+    REGION_NOT_FOUND(HttpStatus.NOT_FOUND, "STORE_001", "해당 지역이 존재하지 않습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
