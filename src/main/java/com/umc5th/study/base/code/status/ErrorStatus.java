@@ -18,6 +18,8 @@ public enum ErrorStatus implements BaseCode {
     STORE_NOT_FOUND(HttpStatus.NOT_FOUND, "STORE_002", "해당 가게가 존재하지 않습니다."),
 
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER_001", "존재하지 않는 사용자입니다."),
+
+    MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION_001", "존재하지 않는 미션입니다."),
     ;
 
     private final HttpStatus httpStatus;
