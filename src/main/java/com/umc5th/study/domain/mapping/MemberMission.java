@@ -1,7 +1,7 @@
 package com.umc5th.study.domain.mapping;
 
+import com.umc5th.study.domain.Member;
 import com.umc5th.study.domain.Mission;
-import com.umc5th.study.domain.User;
 import com.umc5th.study.domain.common.BaseEntity;
 import com.umc5th.study.domain.enums.MissionStatus;
 import jakarta.persistence.Column;
@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class UserMission extends BaseEntity {
+public class MemberMission extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +39,6 @@ public class UserMission extends BaseEntity {
     private Mission mission;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
 }

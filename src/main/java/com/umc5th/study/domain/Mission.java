@@ -1,7 +1,7 @@
 package com.umc5th.study.domain;
 
 import com.umc5th.study.domain.common.BaseEntity;
-import com.umc5th.study.domain.mapping.UserMission;
+import com.umc5th.study.domain.mapping.MemberMission;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,7 +37,7 @@ public class Mission extends BaseEntity {
 
     @Column(nullable = false)
     private Integer reward;
-    
+
     private LocalDate deadline;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -45,5 +45,5 @@ public class Mission extends BaseEntity {
     private Store store;
 
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
-    private List<UserMission> userMissions = new ArrayList<>();
+    private List<MemberMission> memberMissions = new ArrayList<>();
 }

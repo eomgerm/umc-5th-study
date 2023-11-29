@@ -4,9 +4,9 @@ import com.umc5th.study.domain.common.BaseEntity;
 import com.umc5th.study.domain.enums.Gender;
 import com.umc5th.study.domain.enums.SocialType;
 import com.umc5th.study.domain.enums.UserStatus;
-import com.umc5th.study.domain.mapping.UserFoodPreference;
-import com.umc5th.study.domain.mapping.UserMission;
-import com.umc5th.study.domain.mapping.UserTermAgreement;
+import com.umc5th.study.domain.mapping.MemberFoodPreference;
+import com.umc5th.study.domain.mapping.MemberMission;
+import com.umc5th.study.domain.mapping.MemberTermAgreement;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -30,11 +30,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class User extends BaseEntity {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long memberId;
 
     @Column(nullable = false, length = 20)
     private String name;
@@ -68,14 +68,14 @@ public class User extends BaseEntity {
     @Column(nullable = false, length = 200)
     private String email;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserFoodPreference> foodPreferences = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MemberFoodPreference> foodPreferences = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserMission> missions = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MemberMission> missions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserTermAgreement> termAgreements = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MemberTermAgreement> termAgreements = new ArrayList<>();
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();

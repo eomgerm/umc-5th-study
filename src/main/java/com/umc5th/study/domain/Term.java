@@ -1,6 +1,6 @@
 package com.umc5th.study.domain;
 
-import com.umc5th.study.domain.mapping.UserTermAgreement;
+import com.umc5th.study.domain.mapping.MemberTermAgreement;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,5 +37,5 @@ public class Term {
     private boolean optional;
 
     @OneToMany(mappedBy = "term", cascade = CascadeType.ALL)
-    private List<UserTermAgreement> userTermAgreements = new ArrayList<>();
+    private List<MemberTermAgreement> memberTermAgreements = new ArrayList<>();
 }
