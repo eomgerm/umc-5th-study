@@ -16,4 +16,13 @@ public class MissionResponseDto {
 
         private Long missionId;
     }
+
+    @Builder
+    @Getter
+    @AllArgsConstructor(access = AccessLevel.PROTECTED)
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class ChallengeMissionResponseDto {
+
+        private Long challengeId;
+    }
 }
