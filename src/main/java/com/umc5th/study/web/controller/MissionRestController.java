@@ -4,7 +4,9 @@ import com.umc5th.study.base.BaseResponse;
 import com.umc5th.study.base.code.status.SuccessStatus;
 import com.umc5th.study.converter.MissionConverter;
 import com.umc5th.study.domain.Mission;
+import com.umc5th.study.domain.mapping.MemberMission;
 import com.umc5th.study.service.MissionCommandService;
+import com.umc5th.study.validation.annotation.ExistMission;
 import com.umc5th.study.validation.annotation.ExistStore;
 import com.umc5th.study.web.dto.request.MissionRequestDto;
 import com.umc5th.study.web.dto.response.MissionResponseDto;
@@ -36,5 +38,15 @@ public class MissionRestController {
         return ResponseEntity.status(HttpStatus.CREATED)
                              .body(BaseResponse.of(SuccessStatus.CREATED,
                                  MissionConverter.toCreateMissionResponseDto(newMission)));
+    }
+
+    @PostMapping("/api/missions/{missionId}/challenges")
+    @Operation(summary = "미션 도전 API", description = "미션을 도전합니다.")
+    public ResponseEntity<BaseResponse<MissionResponseDto.ChallengeMissionResponseDto>> challengeMission(
+        @ExistMission @PathVariable("missionId") Long missionId) {
+        MemberMission challenge = missionCommandService.challengeMission(missionId, 1L);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                             .body(BaseResponse.of(SuccessStatus.CREATED, MissionConverter.toChallengeMissionResponseDto(challenge)));
     }
 }
