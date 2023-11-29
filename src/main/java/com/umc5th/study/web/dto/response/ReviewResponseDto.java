@@ -7,15 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-public class StoreResponseDto {
+public class ReviewResponseDto {
 
     @Builder
     @Getter
     @Setter
     @AllArgsConstructor(access = AccessLevel.PROTECTED)
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static class CreateStoreResponseDto {
+    public static class CreateReviewResponseDto {
 
-        private Long storeId;
+        private Long reviewId;
     }
 }
