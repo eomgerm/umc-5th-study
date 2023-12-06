@@ -1,9 +1,11 @@
 package com.umc5th.study.service.impl;
 
 import com.umc5th.study.base.code.status.ErrorStatus;
+import com.umc5th.study.domain.Mission;
 import com.umc5th.study.domain.Review;
 import com.umc5th.study.domain.Store;
 import com.umc5th.study.exception.handler.StoreException;
+import com.umc5th.study.repository.MissionRepository;
 import com.umc5th.study.repository.RegionRepository;
 import com.umc5th.study.repository.ReviewRepository;
 import com.umc5th.study.repository.StoreRepository;
@@ -20,6 +22,7 @@ public class StoreQueryServiceImpl implements StoreQueryService {
     private final RegionRepository regionRepository;
     private final StoreRepository storeRepository;
     private final ReviewRepository reviewRepository;
+    private final MissionRepository missionRepository;
 
     @Override
     public Boolean isRegionExists(String regionName) {
@@ -37,5 +40,12 @@ public class StoreQueryServiceImpl implements StoreQueryService {
 
         Page<Review> reviewPage = reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
         return reviewPage;
+    }
+
+    @Override
+    public Page<Mission> getMissionList(Long storeId, Integer page) {
+        Store store = storeRepository.findById(storeId).orElseThrow(() -> new StoreException((ErrorStatus.STORE_NOT_FOUND)));
+
+        return missionRepository.findAllByStore(store, PageRequest.of(page - 1, 10));
     }
 }
