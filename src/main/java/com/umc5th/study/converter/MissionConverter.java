@@ -7,6 +7,8 @@ import com.umc5th.study.domain.enums.MissionStatus;
 import com.umc5th.study.domain.mapping.MemberMission;
 import com.umc5th.study.web.dto.request.MissionRequestDto;
 import com.umc5th.study.web.dto.response.MissionResponseDto;
+import java.util.List;
+import org.springframework.data.domain.Page;
 
 public class MissionConverter {
 
@@ -37,5 +39,29 @@ public class MissionConverter {
         return MissionResponseDto.ChallengeMissionResponseDto.builder()
                                                              .challengeId(challenge.getId())
                                                              .build();
+    }
+
+    public static MissionResponseDto.MissionPreviewListResponseDto toMissionPreviewListResponseDto(Page<Mission> missions) {
+        List<MissionResponseDto.MissionPreviewResponseDto> missionPreviewResponseDtoList = missions.stream()
+                                                                                                   .map(MissionConverter::toMissionPreviewResponseDto)
+                                                                                                   .toList();
+
+        return MissionResponseDto.MissionPreviewListResponseDto.builder()
+                                                               .missionList(missionPreviewResponseDtoList)
+                                                               .listSize(missionPreviewResponseDtoList.size())
+                                                               .totalElements(missions.getTotalElements())
+                                                               .isFirst(missions.isFirst())
+                                                               .isLast(missions.isLast())
+                                                               .totalPage(missions.getTotalPages())
+                                                               .build();
+    }
+
+    public static MissionResponseDto.MissionPreviewResponseDto toMissionPreviewResponseDto(Mission mission) {
+        return MissionResponseDto.MissionPreviewResponseDto.builder()
+                                                           .missionId(mission.getMissionId())
+                                                           .storeName(mission.getStore().getName())
+                                                           .reward(mission.getReward())
+                                                           .contents(mission.getContents())
+                                                           .build();
     }
 }

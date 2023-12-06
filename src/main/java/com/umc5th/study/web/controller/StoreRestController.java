@@ -2,18 +2,23 @@ package com.umc5th.study.web.controller;
 
 import com.umc5th.study.base.BaseResponse;
 import com.umc5th.study.base.code.status.SuccessStatus;
+import com.umc5th.study.converter.MissionConverter;
 import com.umc5th.study.converter.ReviewConverter;
 import com.umc5th.study.converter.StoreConverter;
+import com.umc5th.study.domain.Mission;
 import com.umc5th.study.domain.Review;
 import com.umc5th.study.domain.Store;
 import com.umc5th.study.service.StoreCommandService;
 import com.umc5th.study.service.StoreQueryService;
+import com.umc5th.study.validation.annotation.ExistStore;
 import com.umc5th.study.web.dto.request.StoreRequestDto;
+import com.umc5th.study.web.dto.response.MissionResponseDto;
 import com.umc5th.study.web.dto.response.ReviewResponseDto;
 import com.umc5th.study.web.dto.response.StoreResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -48,10 +53,21 @@ public class StoreRestController {
     @GetMapping("/{storeId}/reviews")
     @Operation(summary = "가게 리뷰 목록 조회 API", description = "가게의 리뷰 목록을 조회합니다.")
     public ResponseEntity<BaseResponse<ReviewResponseDto.ReviewPreviewListDto>> getReviewList(
-        @PathVariable("storeId") Long storeId, @RequestParam("page") Integer page) {
+        @ExistStore @PathVariable("storeId") Long storeId, @RequestParam("page") Integer page) {
         Page<Review> reviewPage = storeQueryService.getReviewList(storeId, page);
 
         return ResponseEntity.status(HttpStatus.OK)
                              .body(BaseResponse.onSuccess(ReviewConverter.toReviewPreviewListDto(reviewPage)));
+    }
+
+    @GetMapping("/{storeId}/missions")
+    @Operation(summary = "가게 미션 목록 조회 API", description = "가게의 미션 목록을 조회합니다.")
+    public ResponseEntity<BaseResponse<MissionResponseDto.MissionPreviewListResponseDto>> getMissionList(
+        @ExistStore @PathVariable("storeId") Long storeId, @RequestParam("page") @Min(value = 1, message = "페이지 번호는 1 이상이어야 합니다.") Integer page) {
+
+        Page<Mission> missionPage = storeQueryService.getMissionList(storeId, page);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                             .body(BaseResponse.onSuccess(MissionConverter.toMissionPreviewListResponseDto(missionPage)));
     }
 }
