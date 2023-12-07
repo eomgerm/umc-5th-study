@@ -6,7 +6,7 @@ import com.umc5th.study.domain.Review;
 import com.umc5th.study.exception.handler.MemberException;
 import com.umc5th.study.repository.MemberRepository;
 import com.umc5th.study.repository.ReviewRepository;
-import com.umc5th.study.service.UserQueryService;
+import com.umc5th.study.service.MemberQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserQueryServiceImpl implements UserQueryService {
+public class MemberQueryServiceImpl implements MemberQueryService {
 
     private final ReviewRepository reviewRepository;
     private final MemberRepository memberRepository;
