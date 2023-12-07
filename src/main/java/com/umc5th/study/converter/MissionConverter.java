@@ -56,6 +56,24 @@ public class MissionConverter {
                                                                .build();
     }
 
+    public static MissionResponseDto.MissionPreviewListResponseDto toMissionPreviewListResponseDtoFromMemberMissions(
+        Page<MemberMission> memberMissions) {
+        List<MissionResponseDto.MissionPreviewResponseDto> missionPreviewResponseDtoList =
+            memberMissions.stream()
+                          .map(MemberMission::getMission)
+                          .map(MissionConverter::toMissionPreviewResponseDto)
+                          .toList();
+
+        return MissionResponseDto.MissionPreviewListResponseDto.builder()
+                                                               .missionList(missionPreviewResponseDtoList)
+                                                               .listSize(missionPreviewResponseDtoList.size())
+                                                               .totalElements(memberMissions.getTotalElements())
+                                                               .isFirst(memberMissions.isFirst())
+                                                               .isLast(memberMissions.isLast())
+                                                               .totalPage(memberMissions.getTotalPages())
+                                                               .build();
+    }
+
     public static MissionResponseDto.MissionPreviewResponseDto toMissionPreviewResponseDto(Mission mission) {
         return MissionResponseDto.MissionPreviewResponseDto.builder()
                                                            .missionId(mission.getMissionId())
